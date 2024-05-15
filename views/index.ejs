@@ -3,23 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>Career Advisor</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="/views/styles.css">
-
 </head>
 <body>
-    <h1>Career Advisor</h1>
-    <form action="/review" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".txt,.pdf,.doc,.docx">
-        <button type="submit">Upload File</button>
-    </form>
-    <% if (responseData) { %>
-        <h2>Review Result:</h2>
-        <ul>
-            <% responseData.forEach(item => { %>
-                <li><%= item %></li>
-            <% }); %>
-        </ul>
-    <% } %>
+    <div class="ui container" style="margin-top: 50px;">
+        <div class="ui raised very padded segment">
+            <h1 class="ui header">Career Advisor</h1>
+            <form class="ui form" action="/review" method="post" enctype="multipart/form-data">
+                <div class="field">
+                    <label>Upload your file</label>
+                    <div class="ui action input">
+                        <input type="file" name="file" accept=".txt,.pdf,.doc,.docx">
+                        <button class="ui primary button" type="submit">Upload</button>
+                    </div>
+                </div>
+            </form>
+
+            <% if (responseData) { %>
+                <h2 class="ui dividing header">Review Result:</h2>
+                <div class="ui relaxed divided list">
+                    <% responseData.forEach(item => { %>
+                        <div class="item">
+                            <i class="large green check circle icon"></i>
+                            <div class="content">
+                                <div class="header"><%= item %></div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>
