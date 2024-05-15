@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 
 
 app.get('/', (req: Request, res: Response) => {
-    res.render('index', { responseData: null });
+    res.render('index', { responseData: null, newCareers: null });
 });
 
 app.post('/review', upload.single('file'), async (req: Request, res: Response) => {
@@ -29,7 +29,7 @@ app.post('/review', upload.single('file'), async (req: Request, res: Response) =
     }
     const filePath = req.file.path;
     const reviewResult = await processFile(filePath);
-    res.render('index', { responseData: reviewResult });
+    res.render('index', { responseData: reviewResult, newCareers: null });
 });
 
 app.post('/new-career', async (req: Request, res: Response) => {
@@ -39,13 +39,13 @@ app.post('/new-career', async (req: Request, res: Response) => {
         return res.status(400).send('No areas of strength provided.');
     }
 
-    const instructions = "Analyze the below CV and provide a comma-separated list with the areas of strengths. Just a list of area names limited to the top 5 most relevant ones.";
+    const instructions = "Based on the provided list of areas, suggest new career paths for this person";
     
     // Process the list of areas of strength
     const newCareers = await newCareer(areasOfStrength);
     
     // Render the result
-    res.render('index', { responseData: newCareers });
+    res.render('index', { responseData: null, newCareers: newCareers });
 });
 
 app.listen(port, () => {
