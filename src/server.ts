@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import path from 'path';
-import { processFile } from './cvProcessor';
+import { newCareer, processFile } from './cvProcessor';
 
 
 const app = express();
@@ -28,9 +28,24 @@ app.post('/review', upload.single('file'), async (req: Request, res: Response) =
         return res.status(400).send('No file uploaded.');
     }
     const filePath = req.file.path;
-    const instructions = "Analise the below CV and provide comma separated list with the areas of strengths. Just a list of area names limited to the top 5 most relevant ones."
-    const reviewResult = await processFile(filePath, instructions);
+    const reviewResult = await processFile(filePath);
     res.render('index', { responseData: reviewResult });
+});
+
+app.post('/new-career', async (req: Request, res: Response) => {
+    const areasOfStrength = req.body.areasOfStrength;
+
+    if (!areasOfStrength || !Array.isArray(areasOfStrength) || areasOfStrength.length === 0) {
+        return res.status(400).send('No areas of strength provided.');
+    }
+
+    const instructions = "Analyze the below CV and provide a comma-separated list with the areas of strengths. Just a list of area names limited to the top 5 most relevant ones.";
+    
+    // Process the list of areas of strength
+    const newCareers = await newCareer(areasOfStrength);
+    
+    // Render the result
+    res.render('index', { responseData: newCareers });
 });
 
 app.listen(port, () => {
