@@ -30,8 +30,10 @@ async function processFile(filePath: string, instructions: string): Promise<stri
             console.log("File successfully processed.")
         }
         console.log("#########################")
-        console.log(response.data.choices[0].message.content)
-        return response.data.choices[0].message.content;
+        const array = response.data.choices[0].message.content.split(',');
+        console.log(array)
+
+        return response.data.choices[0].message.content.split(',');
     } catch (error) {
         console.error('Error processing file:', error);
         throw new Error('Error processing file.');

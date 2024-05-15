@@ -28,7 +28,7 @@ app.post('/review', upload.single('file'), async (req: Request, res: Response) =
         return res.status(400).send('No file uploaded.');
     }
     const filePath = req.file.path;
-    const instructions = "Analise the below CV and provide an array list with the areas of strengths. Avoid copying the CV, just a list of area names and limit it to the top 5 most relevant ones."
+    const instructions = "Analise the below CV and provide comma separated list with the areas of strengths. Just a list of area names limited to the top 5 most relevant ones."
     const reviewResult = await processFile(filePath, instructions);
     res.render('index', { responseData: reviewResult });
 });
