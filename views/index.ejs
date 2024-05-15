@@ -34,6 +34,23 @@
                     <% }); %>
                 </div>
             <% } %>
+
+            <% if (newCareers) { %>
+            <h1 class="ui header">Career Advisor</h1>
+            <form class="ui form" action="/new-careers" method="post" enctype="multipart/form-data">
+                <div class="ui relaxed divided list">
+                    <% newCareers.forEach(item => { %>
+                        <div class="item">
+                            <i class="large green check circle icon"></i>
+                            <div class="content">
+                                <div class="header"><%= item %></div>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </form>
+            <% } %>
+
         </div>
     </div>
 </body>
