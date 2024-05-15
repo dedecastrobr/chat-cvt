@@ -6,7 +6,7 @@ import { processFile } from './cvProcessor';
 
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
@@ -28,10 +28,20 @@ app.post('/review', upload.single('file'), async (req: Request, res: Response) =
         return res.status(400).send('No file uploaded.');
     }
     const filePath = req.file.path;
-    const instructions = "Analise the below CV and provide an array list with the areas of strengths. Avoid copying the CV, just a list of area names and limit it to the top 5 most relevant ones."
+    const instructions = "Analyze the below CV and provide an array list with the areas of strengths. Avoid copying the CV, just a list of area names and limit it to the top 5 most relevant ones.";
     const reviewResult = await processFile(filePath, instructions);
-    res.render('index', { responseData: reviewResult });
+
+    // Convert the string result to an array
+    let responseData;
+    if (typeof reviewResult === 'string') {
+        responseData = reviewResult.split('\n').map(item => item.trim()).filter(item => item.length > 0);
+    } else {
+        responseData = reviewResult;
+    }
+
+    res.render('index', { responseData });
 });
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);

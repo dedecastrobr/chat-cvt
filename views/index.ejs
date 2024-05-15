@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
     <link rel="stylesheet" type="text/css" href="/views/styles.css">
-
 </head>
 <body>
     <h1>Career Advisor</h1>
@@ -15,11 +14,17 @@
     </form>
     <% if (responseData) { %>
         <h2>Review Result:</h2>
-        <ul>
-            <% responseData.forEach(item => { %>
-                <li><%= item %></li>
-            <% }); %>
-        </ul>
+        <% if (Array.isArray(responseData)) { %>
+            <ul>
+                <% responseData.forEach(item => { %>
+                    <li><%= item %></li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>responseData is not an array.</p>
+            <p>Type of responseData: <%= typeof responseData %></p>
+            <p>Value of responseData: <%= JSON.stringify(responseData) %></p>
+        <% } %>
     <% } %>
 </body>
 </html>
