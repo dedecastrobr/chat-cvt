@@ -1,10 +1,14 @@
 /* styles.css */
 
-/* Body and container formatting */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+
 
 .container {
     max-width: 800px;
@@ -30,21 +34,35 @@ input[type="file"] {
     margin-top: 5px;
 }
 
-/* Button styling */
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 button:hover {
     background-color: #0056b3;
 }
 
 /* Response formatting */
+.response {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    color: #155724;
+}
+
+body {
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background: url('/views/images/background.jpg') repeat; /* Change to repeat for tiling */
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+/* Container styling */
+.ui.container {
+    margin-top: 50px;
+}
+
+/* Response formatting (if needed for additional custom messages) */
 .response {
     margin-top: 20px;
     padding: 10px;
