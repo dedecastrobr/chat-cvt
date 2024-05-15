@@ -39,7 +39,7 @@ app.post('/new-career', async (req: Request, res: Response) => {
         return res.status(400).send('No areas of strength provided.');
     }
 
-    const instructions = "Based on the provided list of areas, suggest new career paths for this person";
+    const instructions = "Based on the provided list of areas, suggest new career paths for this person. Just the areas tiles, no description. In a comma separated list.";
     
     // Process the list of areas of strength
     const newCareers = await newCareer(areasOfStrength);

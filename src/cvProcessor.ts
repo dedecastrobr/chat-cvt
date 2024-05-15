@@ -40,7 +40,7 @@ async function processFile(filePath: string): Promise<string> {
 async function newCareer(areasList: string[]): Promise<string> {
     console.log("Starting to create your new professioinal career");
 
-    const instructions = "Based on the provided list of areas, suggest new career paths for this person"
+    const instructions = "Based on the provided list of areas, suggest another list in the same format with new careers path"
     const contentWithInstructions = `${instructions}\n${areasList}`;
 
     try {
