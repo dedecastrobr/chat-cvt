@@ -35,7 +35,7 @@ app.post('/review', upload.single('file'), async (req: Request, res: Response) =
 app.post('/new-career', async (req: Request, res: Response) => {
     const areasOfStrength = req.body.areasOfStrength;
 
-    if (!areasOfStrength || !Array.isArray(areasOfStrength) || areasOfStrength.length === 0) {
+    if (!areasOfStrength) {
         return res.status(400).send('No areas of strength provided.');
     }
 
@@ -43,6 +43,8 @@ app.post('/new-career', async (req: Request, res: Response) => {
     
     // Process the list of areas of strength
     const newCareers = await newCareer(areasOfStrength);
+
+    console.log(newCareers);
     
     // Render the result
     res.render('index', { responseData: null, newCareers: newCareers });

@@ -34,7 +34,7 @@
                             </div>
                         <% }); %>
                     </div>
-                    <input type="hidden" name="areasOfStrength" id="areasOfStrength" value="<% JSON.stringify(responseData) %>">
+                    <input type="hidden" name="areasOfStrength" id="areasOfStrength" value="<%= JSON.stringify(responseData) %>">
                     <button class="ui primary button" type="submit">Suggest new careers</button>
                 </form>
             <% } %>
@@ -46,7 +46,7 @@
                         <div class="item">
                             <i class="large green check circle icon"></i>
                             <div class="content">
-                                <div class="header"><%= item %></div>
+                                <div class="header"></div><a href="https://www.udemy.com/courses/search/?q=<%= item %>"><%= item %></a></div>
                             </div>
                         </div>
                     <% }); %>
